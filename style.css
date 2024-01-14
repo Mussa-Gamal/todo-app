@@ -1,0 +1,401 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+:root {
+    --primary-background: hsl(235, 21%, 11%);
+    --task-background: hsl(235, 24%, 19%);
+    --input-font-color: hsl(234, 39%, 85%);
+    --caret-color: hsl(220, 98%, 61%);
+    --task-font-color: hsl(234, 39%, 85%);
+    --line-through-color: hsl(233, 14%, 35%);
+    --filter-font-color: hsl(233, 14%, 35%);
+    --filter-hover-font-color: #FFFFFF; 
+    --border-color: hsl(237, 14%, 26%);
+    --box-shadow: hsl(0, 0%, 5%);
+}
+
+.light-mode {
+    --primary-background: hsl(0, 0%, 98%);
+    --task-background: #fff;
+    --input-font-color: hsl(235, 24%, 19%);
+    --task-font-color: hsl(235, 19%, 35%);
+    --line-through-color: hsl(233, 11%, 84%);
+    --filter-font-color: hsl(236, 9%, 61%);
+    --filter-hover-font-color: hsl(235, 19%, 35%);
+    --border-color: hsl(236, 33%, 92%);
+    --box-shadow: hsl(0, 11%, 89%);
+}
+
+body {
+    background: var(--primary-background);
+    transition: 200ms;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 10px;
+}
+
+.todo {
+    width: 550px;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    translate: -50% 0;
+    padding-bottom: 20px;
+}
+
+.todo .title_icon {
+    margin-bottom: 30px;
+    top: 0;
+}
+
+main .todo input,
+main .todo .todo-list,
+.taskk {
+    width: 100%;
+    height: 65px;
+    font-size: 1.1rem;
+    padding-left: 68px; 
+    border: none;
+    background: var(--task-background);
+    transition: 200ms;
+}
+
+main .todo input {
+    caret-color: hsl(220, 98%, 61%);
+    color: var(--input-font-color);
+    padding-top: 2px;
+    border-radius: 5px;
+}
+
+.circle-icon-container {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    left: 24px;
+}
+
+.input-container .circle-icon {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    background: var(--task-background);
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    transition: 200ms;
+}
+
+.taskk .circle-icon {
+    position: relative;
+    width: 21px;
+    height: 21px;
+    background: var(--task-background);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: auto;
+    transition: 200ms;
+}
+
+.taskk .circle-icon::before {
+    content: '';
+    background: var(--border-color);
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    margin: -1.5px;
+    border-radius: 50%;
+    transition: 200ms;
+}
+
+.taskk .circle-icon:hover::before {
+    background: linear-gradient(140deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+.circle-icon-onclick {
+    background: linear-gradient(140deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) !important;
+    transition: 200ms;
+}
+
+.circle-icon-onclick::before {
+    background: linear-gradient(140deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) !important;
+}
+
+main .todo .todo-list,
+.taskk {
+    position: relative;
+    color: hsl(234, 39%, 85%);
+    display: flex;
+    align-items: center;
+    border-bottom: 1.6px solid var(--border-color);
+}
+
+.input-container .circle-icon-container svg {
+    display: none;
+}
+
+.circle-icon-container .check-icon {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    pointer-events: none;
+    display: none;
+}
+
+.check-icon-onclick {
+    display: block !important;
+}
+
+main .todo .todo-list .task {
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.cross-icon {
+    position: absolute;
+    right: 25px;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    transition: 300ms;
+}
+
+main .todo .todo-list:hover > .cross-icon {
+    visibility: visible;
+    opacity: 1;
+}
+
+main .todo input:focus {
+    outline: none;
+}
+
+main .todo input::placeholder {
+    font-size: 1.1rem;
+    color: hsl(234, 11%, 52%);
+}
+
+.information {
+    height: 55px;
+    font-size: 0.9rem;
+    color: var(--filter-font-color);
+    background: var(--task-background);
+    border-radius: 0 0 5px 5px;
+    transition: 200ms;
+}
+
+.information .middle-info p {
+    font-weight: 700;
+    transition: 200ms;
+}
+
+.information .middle-info p:hover {
+    color: var(--filter-hover-font-color);
+    cursor: pointer;
+}
+
+.information .clear-completed {
+    transition: 200ms;
+}
+
+.information .clear-completed:hover {
+    color: var(--filter-hover-font-color);
+    cursor: pointer;
+}
+
+
+
+
+.todo-list {
+    transition: transform 0.2s;
+}
+
+.todo-list.drag-over {
+    transform: translateY(-10px);
+}
+
+.sun-icon {
+    display: block;
+    cursor: pointer;
+}
+
+.moon-icon {
+    display: none;
+    cursor: pointer;
+}
+
+
+
+
+
+
+.task-box,
+.information {
+    box-shadow: 0 0 40px 1px var(--box-shadow);
+}
+
+.taskk label {
+    display: flex;
+    align-items: center;
+}
+
+.taskk label p {
+    margin: auto 0;
+    cursor: pointer;
+    color: var(--task-font-color);
+}
+
+.taskk label input {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    translate: 0 -50%;
+    left: 26px;
+    opacity: 0;
+    background-color: #fff;
+    border-radius: 50%;
+    vertical-align: middle;
+    outline: none;
+    pointer-events: none;
+}
+
+.taskk:hover > .cross-icon {
+    visibility: visible;
+    opacity: 1;
+}
+
+.taskk label p.checked {
+    color: var(--line-through-color);
+    text-decoration: line-through;
+}
+
+.middle-info p.active {
+    color: hsl(220, 98%, 61%) !important;
+}
+
+
+
+
+@media(max-width: 768px) {
+    html, body{
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .image-container {
+        height: 160px;
+    }
+
+    .cross-icon {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media(max-width: 650px) {
+    .todo {
+        width: 500px;
+    }
+}
+
+@media(max-width: 580px) {
+    .todo {
+        width: 450px;
+    }
+}
+
+@media(max-width: 510px) {
+    .todo {
+        width: 400px;
+        padding-bottom: 100px;
+    }
+
+    .middle-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: -110px;
+        left: 50%;
+        margin-bottom: 110px;
+        translate: -50% -50%;
+        background: var(--task-background);
+        width: 100%;
+        height: 55px;
+        border-radius: 5px;
+        padding-top: 20px;
+    }
+}
+
+@media(max-width: 460px) {
+    .todo {
+        width: 350px;
+    }
+}
+
+@media(max-width: 420px) {
+    .todo {
+        width: 350px;
+    }
+
+    main .todo input,
+    main .todo .todo-list,
+    .taskk {
+        font-size: 0.9rem;
+    }
+
+    main .todo input::placeholder {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .information {
+        font-size: 0.85rem;
+    }
+}
+
+@media(max-width: 400px) {
+    .todo {
+        width: 330px;
+    }
+
+    main .todo input,
+    main .todo .todo-list,
+    .taskk {
+        height: 55px;
+    }
+
+    .middle-info {
+        height: 55px;
+    }
+}
+
+@media(max-width: 350px) {
+    .todo {
+        width: 300px;
+    }
+}
+
+@media(max-width: 320px) {
+    .todo {
+        width: 280px;
+    }
+}
+
+@media(max-width: 290px) {
+    .todo {
+        width: 250px;
+    }
+}
